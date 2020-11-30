@@ -7,10 +7,9 @@ import com.boot.bootsphereplus.business.entity.LibraryBook;
 import com.boot.bootsphereplus.business.service.LibraryBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,14 +29,20 @@ public class LibraryBookController {
     @RequestMapping(value = "/plus")
     public List<LibraryBook> method() {
         Wrapper<LibraryBook> wrapper=new EntityWrapper<>();
+        wrapper.eq("status", 2);
         wrapper.eq("book_name","demoData");
-        List<LibraryBook> libraryBooks = libraryBookService.selectList(wrapper);
+        List<LibraryBook> libraryBooks = libraryBookService.selectList(null);
         return libraryBooks;
     }
 
-    @RequestMapping(value = "/temp")
+    @RequestMapping(value = "/insert")
     public String temp() {
-        return "temp";
+        LibraryBook libraryBook = new LibraryBook();
+        libraryBook.setBookName("哈姆雷特");
+        libraryBook.setStatus(2);
+        libraryBook.setCreateTime(new Date());
+        boolean flag = libraryBookService.insert(libraryBook);
+        return String.valueOf(flag);
     }
 
 

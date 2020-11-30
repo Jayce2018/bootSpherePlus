@@ -1,7 +1,7 @@
 request:
   server:
     name: servername
-#开发数据源
+  开发数据源
 spring:
   datasource:
     name: test
